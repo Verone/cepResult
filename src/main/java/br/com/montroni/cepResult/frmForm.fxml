@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.montroni.cepResult.ControllerForm"> 
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="700.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-116.0" AnchorPane.topAnchor="0.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#1f93ff" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <GridPane layoutX="36.0" layoutY="29.0" prefHeight="90.0" prefWidth="619.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="0.0" prefWidth="93.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="549.0" minWidth="10.0" prefWidth="516.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Código Empresa" />
+            <Label text="Senha Empresa" GridPane.rowIndex="1" />
+            <TextField fx:id="usuario" promptText="CODIGO SIGEP" GridPane.columnIndex="1" />
+            <TextField fx:id="senha" prefHeight="25.0" prefWidth="544.0" promptText="SENHA SIGEP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="cep" promptText="CEP somente Numeros" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="CEP Origem" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Hyperlink layoutX="100.0" layoutY="119.0" onAction="#abrirLink" prefHeight="29.0" prefWidth="480.0" text="http://www.corporativo.correios.com.br/encomendas/sigepweb/" textAlignment="CENTER" textFill="WHITE" underline="true">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Hyperlink>
+      <GridPane layoutX="27.0" layoutY="151.0" prefHeight="266.0" prefWidth="234.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <CheckBox fx:id="cb_40010" mnemonicParsing="false" text="40010 - SEDEX sem contrato" />
+            <CheckBox fx:id="cb_40045" mnemonicParsing="false" text="40045 - SEDEX a Cobrar, sem contrato" GridPane.rowIndex="1" />
+            <CheckBox fx:id="cb_40126" mnemonicParsing="false" text="40126 - SEDEX a Cobrar, com contrato" GridPane.rowIndex="2" />
+            <CheckBox fx:id="cb_40215" mnemonicParsing="false" text="40215 - SEDEX 10, sem contrato" GridPane.rowIndex="3" />
+            <CheckBox fx:id="cb_40290" mnemonicParsing="false" text="40290 - SEDEX Hoje, sem contrato" GridPane.rowIndex="4" />
+            <CheckBox fx:id="cb_40096" mnemonicParsing="false" text="40096 - SEDEX com contrato" GridPane.rowIndex="5" />
+            <CheckBox fx:id="cb_40436" mnemonicParsing="false" text="40436 - SEDEX com contrato" GridPane.rowIndex="6" />
+            <CheckBox fx:id="cb_40444" mnemonicParsing="false" text="40444 - SEDEX com contrato" GridPane.rowIndex="7" />
+            <CheckBox fx:id="cb_40568" mnemonicParsing="false" text="40568 - SEDEX com contrato" GridPane.rowIndex="8" />
+            <CheckBox fx:id="cb_40606" mnemonicParsing="false" text="40606 - SEDEX com contrato" GridPane.rowIndex="9" />
+            <CheckBox fx:id="cb_04162" mnemonicParsing="false" text="04162 - SEDEX relac varejo" GridPane.rowIndex="10" />
+            <CheckBox fx:id="cb_04014" mnemonicParsing="false" text="04014 - SEDEX varejo a vista" GridPane.rowIndex="11" />
+            <CheckBox fx:id="cb_40836" mnemonicParsing="false" text="40836  - SEDEX" GridPane.rowIndex="12" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="325.0" layoutY="155.0" prefHeight="167.0" prefWidth="288.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <CheckBox fx:id="cb_41106" mnemonicParsing="false" text="41106 - PAC sem contrato" />
+            <CheckBox fx:id="cb_41211" mnemonicParsing="false" text="41211 - PAC com contrato" GridPane.rowIndex="1" />
+            <CheckBox fx:id="cb_41068" mnemonicParsing="false" text="41068 - PAC com contrato" GridPane.rowIndex="2" />
+            <CheckBox fx:id="cb_04669" mnemonicParsing="false" text="04669 - PAC relac varejo" GridPane.rowIndex="3" />
+            <CheckBox fx:id="cb_04510" mnemonicParsing="false" text="04510 - PAC varejo a vista" GridPane.rowIndex="4" />
+            <CheckBox fx:id="cb_04693" mnemonicParsing="false" text="04693 - PAC - Contrato - Grandes Formatos" GridPane.rowIndex="5" />
+            <CheckBox fx:id="cb_04316" mnemonicParsing="false" text="04316 - SEDEX Industrial" GridPane.rowIndex="6" />
+            <CheckBox fx:id="cb_04812" mnemonicParsing="false" text="04812 - PAC Industrial" GridPane.rowIndex="7" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="325.0" layoutY="296.0" prefHeight="52.0" prefWidth="244.0">
+         <children>
+            <CheckBox fx:id="cb_10707" mnemonicParsing="false" text="10707 - Carta registrada contrato" />
+            <CheckBox fx:id="cb_10014" mnemonicParsing="false" text="10014 - Carta Registrada a Vista" GridPane.rowIndex="1" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Label layoutX="325.0" layoutY="369.0" text="Personalizado (1)" />
+      <TextField fx:id="edCodigo01" layoutX="426.0" layoutY="365.0" prefHeight="25.0" prefWidth="49.0" promptText="01234" />
+      <TextField fx:id="edDescricao01" layoutX="483.0" layoutY="365.0" prefHeight="25.0" prefWidth="151.0" promptText="Descricao Personalizada" />
+      <Label layoutX="325.0" layoutY="396.0" text="Personalizado (2)" />
+      <TextField fx:id="edCodigo02" layoutX="426.0" layoutY="392.0" prefHeight="25.0" prefWidth="49.0" promptText="01234" />
+      <TextField fx:id="edDescricao02" layoutX="483.0" layoutY="392.0" prefHeight="25.0" prefWidth="151.0" promptText="Descricao Personalizada" />
+      <GridPane layoutX="27.0" layoutY="440.0" prefHeight="135.0" prefWidth="356.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <CheckBox fx:id="boACRE" mnemonicParsing="false" selected="true" text="AC" />
+            <CheckBox fx:id="boALAGOAS" mnemonicParsing="false" selected="true" text="AL" GridPane.rowIndex="1" />
+            <CheckBox fx:id="boAMAZONAS" mnemonicParsing="false" selected="true" text="AM" GridPane.rowIndex="2" />
+            <CheckBox fx:id="boAMAPA" mnemonicParsing="false" selected="true" text="AP" GridPane.rowIndex="3" />
+            <CheckBox fx:id="boBAHIA" mnemonicParsing="false" selected="true" text="BA" GridPane.rowIndex="4" />
+            <CheckBox fx:id="boCEARA" mnemonicParsing="false" selected="true" text="CE" GridPane.rowIndex="5" />
+            <CheckBox fx:id="boDISTRITO_FEDERAL" mnemonicParsing="false" selected="true" text="DF" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <CheckBox fx:id="boESPIRITO_SANTO" mnemonicParsing="false" selected="true" text="ES" GridPane.rowIndex="6" />
+            <CheckBox fx:id="boGOIAS" mnemonicParsing="false" selected="true" text="GO" GridPane.columnIndex="1" />
+            <CheckBox fx:id="boMARANHAO" mnemonicParsing="false" selected="true" text="MA" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="boMINAS_GERAIS" mnemonicParsing="false" selected="true" text="MG" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckBox fx:id="boMATO_GROSSO_SUL" mnemonicParsing="false" selected="true" text="MS" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="boMATO_GROSSO" mnemonicParsing="false" selected="true" text="MT" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <CheckBox fx:id="boPARA" mnemonicParsing="false" selected="true" text="PA" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <CheckBox fx:id="boPARAIBA" mnemonicParsing="false" selected="true" text="PB" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <CheckBox fx:id="boPERNAMBUCO" mnemonicParsing="false" selected="true" text="PE" GridPane.columnIndex="2" />
+            <CheckBox fx:id="boPIAUI" mnemonicParsing="false" selected="true" text="PI" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <CheckBox fx:id="boPARANA" mnemonicParsing="false" selected="true" text="PR" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <CheckBox fx:id="boRIO_JANEIRO" mnemonicParsing="false" selected="true" text="RJ" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <CheckBox fx:id="boRIO_GRANDE_NORTE" mnemonicParsing="false" selected="true" text="RN" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <CheckBox fx:id="boRONDONIA" mnemonicParsing="false" selected="true" text="RO" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <CheckBox fx:id="boRORAIMA" mnemonicParsing="false" selected="true" text="RR" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <CheckBox fx:id="boRIO_GRANDE_SUL" mnemonicParsing="false" selected="true" text="RS" GridPane.columnIndex="3" />
+            <CheckBox fx:id="boSANTA_CATARINA" mnemonicParsing="false" selected="true" text="SC" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <CheckBox fx:id="boSERGIPE" mnemonicParsing="false" selected="true" text="SE" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <CheckBox fx:id="boSAO_PAULO" mnemonicParsing="false" selected="true" text="SP" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <CheckBox fx:id="boTOCANTINS" mnemonicParsing="false" selected="true" text="TO" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="357.0" layoutY="462.0" prefHeight="90.0" prefWidth="297.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="78.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.0" minWidth="10.0" prefWidth="219.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Altura" />
+            <Label text="Largura" GridPane.rowIndex="1" />
+            <Label prefHeight="17.0" prefWidth="80.0" text="Comprimento" GridPane.rowIndex="2" />
+            <TextField fx:id="txtAltura" text="20" GridPane.columnIndex="1" />
+            <TextField fx:id="txtLargura" prefHeight="25.0" prefWidth="159.0" text="20" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtComprimento" prefHeight="25.0" prefWidth="181.0" text="20" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Label layoutX="27.0" layoutY="432.0" text="Nome do Arquivo" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="27.0" />
+      <TextField fx:id="arquivo" layoutX="129.0" layoutY="428.0" prefHeight="25.0" prefWidth="412.0" promptText="Informe o nome do arquivo.CSV" text="correio.CSV" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="129.0" AnchorPane.rightAnchor="27.0" />
+      <Label layoutX="27.0" layoutY="465.0" text="Requisições" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="27.0" />
+      <TextField fx:id="qt_req" alignment="CENTER" disable="true" editable="false" layoutX="99.0" layoutY="461.0" prefHeight="25.0" prefWidth="244.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="225.0" />
+      <Button fx:id="botao" layoutX="358.0" layoutY="461.0" mnemonicParsing="false" onAction="#iniciarProcesso" prefHeight="25.0" prefWidth="183.0" text="Gerar" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="27.0" />
+      <CheckBox fx:id="boConsulta" layoutX="27.0" layoutY="665.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="244.0" text="Gerar coluna de Consulta" />
+      <ProgressBar fx:id="progresso" layoutX="297.0" layoutY="519.0" prefHeight="37.0" prefWidth="244.0" progress="0.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="297.0" AnchorPane.rightAnchor="27.0" />
+   </children>
+</AnchorPane>
