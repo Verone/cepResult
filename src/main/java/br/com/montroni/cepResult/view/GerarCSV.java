@@ -309,7 +309,7 @@ public final class GerarCSV extends Thread {
             listaCep.add(new Cep("69255000", "69259999", "69255001", "AM - Regiao Metropolitana"));
             listaCep.add(new Cep("69260000", "69414999", "69260001", "AM - Interior 2"));
             listaCep.add(new Cep("69415000", "69424999", "69415001", "AM - Regiao Metropolitana 2"));
-            listaCep.add(new Cep("69390000", "69899999", "69390001", "AM - Interior 3"));
+            listaCep.add(new Cep("69425000", "69899999", "69425001", "AM - Interior 3"));
         }
 
         if (boAMAPA) {
@@ -346,32 +346,32 @@ public final class GerarCSV extends Thread {
 
         if (boESPIRITO_SANTO) {
             listaCep.add(new Cep("29000000", "29099999", "29000001", "ES - Capital"));
-            listaCep.add(new Cep("29100001", "29189999", "29100001", "ES - Regiao Metropolitana"));
+            listaCep.add(new Cep("29100000", "29189999", "29100001", "ES - Regiao Metropolitana"));
             listaCep.add(new Cep("29190000", "29200000", "29190001", "ES - Interior"));
             listaCep.add(new Cep("29200001", "29229999", "29200001", "ES - Regiao Metropolitana 2"));
             listaCep.add(new Cep("29230000", "29999999", "29230001", "ES - Interior 2"));
         }
 
         if (boGOIAS) {
-            listaCep.add(new Cep("74000001", "74899999", "74000001", "GO - Capital"));
-            listaCep.add(new Cep("74900001", "75159999", "74900001", "GO - Regiao Metropolitana"));
-            listaCep.add(new Cep("75160000", "75169999", "75160001", "GO - Interior"));
-            listaCep.add(new Cep("75170000", "75179999", "75170001", "GO - Regiao Metropolitana 2"));
-            listaCep.add(new Cep("75180000", "75194999", "75180001", "GO - Interior 2"));
-            listaCep.add(new Cep("75195000", "75199999", "75195001", "GO - Regiao Metropolitana 3"));
-            listaCep.add(new Cep("75200000", "75239999", "75200001", "GO - Interior 3"));
-            listaCep.add(new Cep("75240000", "75264999", "75240001", "GO - Regiao Metropolitana 4"));
-            listaCep.add(new Cep("75265000", "75339999", "75265001", "GO - Interior 4"));
-            listaCep.add(new Cep("75340000", "75354999", "75340001", "GO - Regiao Metropolitana 5"));
-            listaCep.add(new Cep("75355000", "75359999", "75355001", "GO - Interior 5"));
-            listaCep.add(new Cep("75360000", "75394999", "75360001", "GO - Regiao Metropolitana 6"));
-            listaCep.add(new Cep("75395000", "75399999", "75395001", "GO - Interior 6"));
-            listaCep.add(new Cep("75400000", "75409999", "75400001", "GO - Regiao Metropolitana 7"));
-            listaCep.add(new Cep("75410000", "75429999", "75410001", "GO - Interior 7"));
-            listaCep.add(new Cep("75430000", "75449999", "75430001", "GO - Regiao Metropolitana 8"));
-            listaCep.add(new Cep("75450000", "75459999", "75450001", "GO - Interior 8"));
-            listaCep.add(new Cep("75460000", "75479999", "75460001", "GO - Regiao Metropolitana 9"));
-            listaCep.add(new Cep("75480000", "76759999", "75480001", "GO - Interior 9"));
+        	listaCep.add(new Cep("74000001", "74899999", "74000001", "GO - Capital"));
+        	listaCep.add(new Cep("74900001", "75159999", "74900001", "GO - Regiao Metropolitana"));
+        	listaCep.add(new Cep("75160000", "75169999", "75160001", "GO - Interior"));
+        	listaCep.add(new Cep("75170000", "75179999", "75170001", "GO - Regiao Metropolitana 2"));
+        	listaCep.add(new Cep("75180000", "75194999", "75180001", "GO - Interior 2"));
+        	listaCep.add(new Cep("75195000", "75199999", "75195001", "GO - Regiao Metropolitana 3"));
+        	listaCep.add(new Cep("75200000", "75239999", "75200001", "GO - Interior 3"));
+        	listaCep.add(new Cep("75240000", "75264999", "75240001", "GO - Regiao Metropolitana 4"));
+        	listaCep.add(new Cep("75265000", "75339999", "75265001", "GO - Interior 4"));
+        	listaCep.add(new Cep("75340000", "75354999", "75340001", "GO - Regiao Metropolitana 5"));
+        	listaCep.add(new Cep("75355000", "75359999", "75355001", "GO - Interior 5"));
+        	listaCep.add(new Cep("75360000", "75394999", "75360001", "GO - Regiao Metropolitana 6"));
+        	listaCep.add(new Cep("75395000", "75399999", "75395001", "GO - Interior 6"));
+        	listaCep.add(new Cep("75400000", "75409999", "75400001", "GO - Regiao Metropolitana 7"));
+        	listaCep.add(new Cep("75410000", "75429999", "75410001", "GO - Interior 7"));
+        	listaCep.add(new Cep("75430000", "75449999", "75430001", "GO - Regiao Metropolitana 8"));
+        	listaCep.add(new Cep("75450000", "75459999", "75450001", "GO - Interior 8"));
+        	listaCep.add(new Cep("75460000", "75479999", "75460001", "GO - Regiao Metropolitana 9"));
+        	listaCep.add(new Cep("75480000", "76759999", "75480001", "GO - Interior 9"));
         }
 
         if (boMARANHAO) {
@@ -385,11 +385,27 @@ public final class GerarCSV extends Thread {
         }
 
         if (boMINAS_GERAIS) {
-            listaCep.add(new Cep("30000001", "31999999", "30000001", "MG - Capital"));
-            listaCep.add(new Cep("32000001", "32499999", "32000001", "MG - Regiao Metropolitana"));
-            listaCep.add(new Cep("32500000", "32600001", "32500000", "MG - Interior"));
-            listaCep.add(new Cep("32600001", "32699999", "32600001", "MG - Regiao Metropolitana 2"));
-            listaCep.add(new Cep("32699999", "32600001", "32699999", "MG - Interior 2"));
+        	listaCep.add(new Cep("30000001", "31999999", "30000001", "MG - Capital"));
+        	listaCep.add(new Cep("32000001", "32499999", "32000001", "MG - Regiao Metropolitana"));
+        	listaCep.add(new Cep("32500000", "32600000", "32500001", "MG - Interior"));
+        	listaCep.add(new Cep("32600001", "32699999", "32600001", "MG - Regiao Metropolitana 2"));
+        	listaCep.add(new Cep("32700000", "32899999", "32700001", "MG - Interior 2"));
+        	listaCep.add(new Cep("32900000", "34999999", "32900001", "MG - Regiao Metropolitana 3"));
+        	listaCep.add(new Cep("35000000", "35449999", "35000001", "MG - Interior 3"));
+        	listaCep.add(new Cep("35450000", "35469999", "35450001", "MG - Regiao Metropolitana 4"));
+        	listaCep.add(new Cep("35470000", "35669999", "35470001", "MG - Interior 4"));
+        	listaCep.add(new Cep("35670000", "35679999", "35670001", "MG - Regiao Metropolitana 5"));
+        	listaCep.add(new Cep("35680000", "35689999", "35680001", "MG - Interior 5"));
+        	listaCep.add(new Cep("35690000", "35693999", "35690001", "MG - Regiao Metropolitana 6"));
+        	listaCep.add(new Cep("35694000", "35700000", "35694001", "MG - Interior 6"));
+        	listaCep.add(new Cep("35700001", "35731999", "35700001", "MG - Regiao Metropolitana 7"));
+        	listaCep.add(new Cep("35732000", "35735999", "35732001", "MG - Interior 7"));
+        	listaCep.add(new Cep("35736000", "35759999", "35736001", "MG - Regiao Metropolitana 8"));
+        	listaCep.add(new Cep("35760000", "35829999", "35760001", "MG - Interior 8"));
+        	listaCep.add(new Cep("35830000", "35844999", "35830001", "MG - Regiao Metropolitana 9"));
+        	listaCep.add(new Cep("35845000", "35969999", "35845001", "MG - Interior 9"));
+        	listaCep.add(new Cep("35970000", "35983999", "35970001", "MG - Regiao Metropolitana 10"));
+        	listaCep.add(new Cep("35984000", "39997999", "35984001", "MG - Interior 10"));
         }
 
         if (boMATO_GROSSO_SUL) {
@@ -414,17 +430,17 @@ public final class GerarCSV extends Thread {
         }
 
         if (boPARAIBA) {
-            listaCep.add(new Cep("58000000", "58099999", "58000001", "PB - Capital"));
-            listaCep.add(new Cep("58100000", "58109999", "58100001", "PB - Regiao Metropolitana"));
-            listaCep.add(new Cep("58110000", "58279999", "58110001", "PB - Interior"));
-            listaCep.add(new Cep("58280000", "58286999", "58280001", "PB - Regiao Metropolitana 2"));
-            listaCep.add(new Cep("58287000", "58296999", "58287001", "PB - Interior 2"));
-            listaCep.add(new Cep("58297000", "58309999", "58297001", "PB - Regiao Metropolitana 3"));
-            listaCep.add(new Cep("58310000", "58314999", "58310001", "PB - Interior 3"));
-            listaCep.add(new Cep("58315000", "58329999", "58315001", "PB - Regiao Metropolitana 4"));
-            listaCep.add(new Cep("58330000", "58336999", "58330001", "PB - Interior 4"));
-            listaCep.add(new Cep("58337000", "58337999", "58337001", "PB - Regiao Metropolitana 5"));
-            listaCep.add(new Cep("58338000", "58996999", "58338001", "PB - Interior 5"));
+        	listaCep.add(new Cep("58000000", "58099999", "58000001", "PB - Capital"));
+        	listaCep.add(new Cep("58100000", "58109999", "58100001", "PB - Regiao Metropolitana"));
+        	listaCep.add(new Cep("58110000", "58279999", "58110001", "PB - Interior"));
+        	listaCep.add(new Cep("58280000", "58286999", "58280001", "PB - Regiao Metropolitana 2"));
+        	listaCep.add(new Cep("58287000", "58296999", "58287001", "PB - Interior 2"));
+        	listaCep.add(new Cep("58297000", "58309999", "58297001", "PB - Regiao Metropolitana 3"));
+        	listaCep.add(new Cep("58310000", "58314999", "58310001", "PB - Interior 3"));
+        	listaCep.add(new Cep("58315000", "58329999", "58315001", "PB - Regiao Metropolitana 4"));
+        	listaCep.add(new Cep("58330000", "58336999", "58330001", "PB - Interior 4"));
+        	listaCep.add(new Cep("58337000", "58337999", "58337001", "PB - Regiao Metropolitana 5"));
+        	listaCep.add(new Cep("58338000", "58999999", "58338001", "PB - Interior 5"));
         }
 
         if (boPERNAMBUCO) {
@@ -530,74 +546,74 @@ public final class GerarCSV extends Thread {
         if (boSANTA_CATARINA) {
             listaCep.add(new Cep("88000001", "88099999", "88000001", "SC - Capital"));
             listaCep.add(new Cep("88100001", "88209999", "88100001", "SC - Regiao Metropolitana"));
-            listaCep.add(new Cep("88210000", "88229999", "88210000", "SC - Interior"));
-            listaCep.add(new Cep("88230000", "88294999", "88230000", "SC - Regiao Metropolitana 2"));
-            listaCep.add(new Cep("88295000", "88459999", "88295000", "SC - Interior 2"));
-            listaCep.add(new Cep("88460000", "88474999", "88460000", "SC - Regiao Metropolitana 3"));
-            listaCep.add(new Cep("88475000", "88484999", "88475000", "SC - Interior 3"));
-            listaCep.add(new Cep("88485000", "88499999", "88485000", "SC - Regiao Metropolitana 4"));
-            listaCep.add(new Cep("88500000", "89999999", "88500000", "SC - Interior 4"));
+            listaCep.add(new Cep("88210000", "88229999", "88210001", "SC - Interior"));
+            listaCep.add(new Cep("88230000", "88294999", "88230001", "SC - Regiao Metropolitana 2"));
+            listaCep.add(new Cep("88295000", "88459999", "88295001", "SC - Interior 2"));
+            listaCep.add(new Cep("88460000", "88474999", "88460001", "SC - Regiao Metropolitana 3"));
+            listaCep.add(new Cep("88475000", "88484999", "88475001", "SC - Interior 3"));
+            listaCep.add(new Cep("88485000", "88499999", "88485001", "SC - Regiao Metropolitana 4"));
+            listaCep.add(new Cep("88500000", "89999999", "88500001", "SC - Interior 4"));
         }
 
         if (boSERGIPE) {
             listaCep.add(new Cep("49000001", "49099999", "49000001", "SE - Capital"));
-            listaCep.add(new Cep("49100000", "49119999", "49100000", "SE - Regiao Metropolitana"));
-            listaCep.add(new Cep("49120000", "49139999", "49120000", "SE - Interior"));
-            listaCep.add(new Cep("49140000", "49169999", "49140000", "SE - Regiao Metropolitana 2"));
-            listaCep.add(new Cep("49170000", "49999999", "49170000", "SE - Interior 2"));
+            listaCep.add(new Cep("49100000", "49119999", "49100001", "SE - Regiao Metropolitana"));
+            listaCep.add(new Cep("49120000", "49139999", "49120001", "SE - Interior"));
+            listaCep.add(new Cep("49140000", "49169999", "49140001", "SE - Regiao Metropolitana 2"));
+            listaCep.add(new Cep("49170000", "49999999", "49170001", "SE - Interior 2"));
         }
 
         if (boSAO_PAULO) {
             listaCep.add(new Cep("01000001", "05999999", "01000001", "SP - Capital"));
             listaCep.add(new Cep("06000001", "06949999", "06000001", "SP - Regiao Metropolitana"));
-            listaCep.add(new Cep("06950000", "07000000", "06950000", "SP - Interior"));
+            listaCep.add(new Cep("06950000", "07000000", "06950001", "SP - Interior"));
             listaCep.add(new Cep("07000001", "08899999", "07000001", "SP - Regiao Metropolitana 2"));
-            listaCep.add(new Cep("08900000", "09000000", "08900000", "SP - Interior 2"));
+            listaCep.add(new Cep("08900000", "09000000", "08900001", "SP - Interior 2"));
             listaCep.add(new Cep("09000001", "09999999", "09000001", "SP - Regiao Metropolitana 3"));
-            listaCep.add(new Cep("10000000", "11000000", "10000000", "SP - Interior 3"));
+            listaCep.add(new Cep("10000000", "11000000", "10000001", "SP - Interior 3"));
             listaCep.add(new Cep("11000001", "11249999", "11000001", "SP - Regiao Metropolitana 4"));
-            listaCep.add(new Cep("11250000", "11300000", "11250000", "SP - Interior 4"));
+            listaCep.add(new Cep("11250000", "11300000", "11250001", "SP - Interior 4"));
             listaCep.add(new Cep("11300001", "11499999", "11300001", "SP - Regiao Metropolitana 5"));
-            listaCep.add(new Cep("11500000", "12200000", "11500000", "SP - Interior 5"));
+            listaCep.add(new Cep("11500000", "12200000", "11500001", "SP - Interior 5"));
             listaCep.add(new Cep("12200001", "12249999", "12200001", "SP - Regiao Metropolitana 6"));
-            listaCep.add(new Cep("12250000", "12300000", "12250000", "SP - Interior 6"));
+            listaCep.add(new Cep("12250000", "12300000", "12250001", "SP - Interior 6"));
             listaCep.add(new Cep("12300001", "12349999", "12300001", "SP - Regiao Metropolitana 7"));
-            listaCep.add(new Cep("12350000", "12900000", "12350000", "SP - Interior 7"));
+            listaCep.add(new Cep("12350000", "12900000", "12350001", "SP - Interior 7"));
             listaCep.add(new Cep("12900001", "12929999", "12900001", "SP - Regiao Metropolitana 8"));
-            listaCep.add(new Cep("12930000", "12940000", "12930000", "SP - Interior 8"));
+            listaCep.add(new Cep("12930000", "12940000", "12930001", "SP - Interior 8"));
             listaCep.add(new Cep("12940001", "12954999", "12940001", "SP - Regiao Metropolitana 9"));
-            listaCep.add(new Cep("12955000", "13000000", "12955000", "SP - Interior 9"));
+            listaCep.add(new Cep("12955000", "13000000", "12955001", "SP - Interior 9"));
             listaCep.add(new Cep("13000001", "13219999", "13000001", "SP - Regiao Metropolitana 10"));
-            listaCep.add(new Cep("13220000", "13250000", "13220000", "SP - Interior 10"));
+            listaCep.add(new Cep("13220000", "13250000", "13220001", "SP - Interior 10"));
             listaCep.add(new Cep("13250001", "13259999", "13250001", "SP - Regiao Metropolitana 11"));
-            listaCep.add(new Cep("13260000", "13270000", "13260000", "SP - Interior 11"));
+            listaCep.add(new Cep("13260000", "13270000", "13260001", "SP - Interior 11"));
             listaCep.add(new Cep("13270001", "13289999", "13270001", "SP - Regiao Metropolitana 12"));
-            listaCep.add(new Cep("13290000", "13300000", "13290000", "SP - Interior 12"));
+            listaCep.add(new Cep("13290000", "13300000", "13290001", "SP - Interior 12"));
             listaCep.add(new Cep("13300001", "13314999", "13300001", "SP - Regiao Metropolitana 13"));
-            listaCep.add(new Cep("13315000", "13320000", "13315000", "SP - Interior 13"));
+            listaCep.add(new Cep("13315000", "13320000", "13315001", "SP - Interior 13"));
             listaCep.add(new Cep("13320001", "13349999", "13320001", "SP - Regiao Metropolitana 14"));
-            listaCep.add(new Cep("13350000", "13380000", "13350000", "SP - Interior 14"));
+            listaCep.add(new Cep("13350000", "13380000", "13350001", "SP - Interior 14"));
             listaCep.add(new Cep("13380001", "13389999", "13380001", "SP - Regiao Metropolitana 15"));
-            listaCep.add(new Cep("13390000", "13400000", "13390000", "SP - Interior 15"));
+            listaCep.add(new Cep("13390000", "13400000", "13390001", "SP - Interior 15"));
             listaCep.add(new Cep("13400001", "13439999", "13400001", "SP - Regiao Metropolitana 16"));
-            listaCep.add(new Cep("13440000", "13445000", "13440000", "SP - Interior 17"));
+            listaCep.add(new Cep("13440000", "13445000", "13440001", "SP - Interior 17"));
             listaCep.add(new Cep("13445001", "13489999", "13445001", "SP - Regiao Metropolitana 18"));
-            listaCep.add(new Cep("13490000", "13500000", "13490000", "SP - Interior 18"));
+            listaCep.add(new Cep("13490000", "13500000", "13490001", "SP - Interior 18"));
             listaCep.add(new Cep("13500001", "13509999", "13500001", "SP - Regiao Metropolitana 19"));
-            listaCep.add(new Cep("13510000", "13600000", "13510000", "SP - Interior 19"));
+            listaCep.add(new Cep("13510000", "13600000", "13510001", "SP - Interior 19"));
             listaCep.add(new Cep("13600001", "13609999", "13600001", "SP - Regiao Metropolitana 20"));
-            listaCep.add(new Cep("13610000", "13800000", "13610000", "SP - Interior 20"));
+            listaCep.add(new Cep("13610000", "13800000", "13610001", "SP - Interior 20"));
             listaCep.add(new Cep("13800001", "13819999", "13800001", "SP - Regiao Metropolitana 21"));
-            listaCep.add(new Cep("13820000", "13824999", "13820000", "SP - Interior 21"));
-            listaCep.add(new Cep("13825000", "13834999", "13825000", "SP - Regiao Metropolitana 22"));
-            listaCep.add(new Cep("13835000", "13840000", "13835000", "SP - Interior 22"));
+            listaCep.add(new Cep("13820000", "13824999", "13820001", "SP - Interior 21"));
+            listaCep.add(new Cep("13825000", "13834999", "13825001", "SP - Regiao Metropolitana 22"));
+            listaCep.add(new Cep("13835000", "13840000", "13835001", "SP - Interior 22"));
             listaCep.add(new Cep("13840001", "13856999", "13840001", "SP - Regiao Metropolitana 23"));
-            listaCep.add(new Cep("13857000", "13910000", "13857000", "SP - Interior 23"));
+            listaCep.add(new Cep("13857000", "13910000", "13857001", "SP - Interior 23"));
             listaCep.add(new Cep("13910001", "13929999", "13910001", "SP - Regiao Metropolitana 24"));
-            listaCep.add(new Cep("13930000", "18000000", "13930000", "SP - Interior 24"));
+            listaCep.add(new Cep("13930000", "18000000", "13930001", "SP - Interior 24"));
             listaCep.add(new Cep("18000001", "18119999", "18000001", "SP - Regiao Metropolitana 25"));
-            listaCep.add(new Cep("18120000", "19999999", "18120000", "SP - Interior 25"));
-            listaCep.add(new Cep("37640000", "37649999", "37640000", "SP - EXTREMAMG"));
+            listaCep.add(new Cep("18120000", "19999999", "18120001", "SP - Interior 25"));
+            listaCep.add(new Cep("37640000", "37649999", "37640001", "SP - EXTREMAMG"));
         }
         if (boTOCANTINS) {
             listaCep.add(new Cep("77000001", "77270999", "77000001", "TO - Capital"));
