@@ -1,5 +1,5 @@
 # cepResult
-Consulta de CEP nos CORREIOS
+Consulta de CEP nos CORREIOS através de Usuário e Senha do contrato e monta a planilha de importação de frete do Anymarket.
 
 #Exportar JAR
 No Eclipse:
