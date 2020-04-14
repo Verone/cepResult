@@ -198,6 +198,9 @@ public class ControllerForm {
 	@FXML
 	private TextField txtComprimento;
 
+	@FXML
+	private TextField qtRetentativas;
+
 	GerarCSV gerarCSV = GerarCSV.getInstance();
 
 	Thread thredGerarCSV = new Thread(gerarCSV);
@@ -254,6 +257,7 @@ public class ControllerForm {
 		gerarCSV.setTxtAltura(txtAltura.getText());
 		gerarCSV.setTxtLargura(txtLargura.getText());
 		gerarCSV.setTxtComprimento(txtComprimento.getText());
+		gerarCSV.setQtRetentativas(Integer.parseInt(qtRetentativas.getText()));
 
 		listaDeEstadosHabilitados();
 
@@ -425,8 +429,10 @@ public class ControllerForm {
 			@Override
 			public void run() {
 
-				setaStatus(GerarCSV.getContador() / GerarCSV.getVltotalProcessamento());
-				setaRequisicao(GerarCSV.getContador().toString() + '/' + GerarCSV.getVltotalProcessamento().toString());
+				Double contadorExecucoes = GerarCSV.getContador() * gerarCSV.quantidadeServicoSelecionado();
+				Double totalExecucoes = GerarCSV.getVltotalProcessamento() * gerarCSV.quantidadeServicoSelecionado();
+				setaStatus(contadorExecucoes / totalExecucoes);
+				setaRequisicao(contadorExecucoes.toString() + '/' + totalExecucoes.toString());
 
 			}
 		};

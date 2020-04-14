@@ -200,9 +200,11 @@
       <Label layoutX="27.0" layoutY="432.0" text="Nome do Arquivo" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="27.0" />
       <TextField fx:id="arquivo" layoutX="129.0" layoutY="428.0" prefHeight="25.0" prefWidth="412.0" promptText="Informe o nome do arquivo.CSV" text="correio.CSV" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="129.0" AnchorPane.rightAnchor="27.0" />
       <Label layoutX="27.0" layoutY="465.0" text="Requisições" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="27.0" />
-      <TextField fx:id="qt_req" alignment="CENTER" disable="true" editable="false" layoutX="99.0" layoutY="461.0" prefHeight="25.0" prefWidth="244.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="225.0" />
-      <Button fx:id="botao" layoutX="358.0" layoutY="461.0" mnemonicParsing="false" onAction="#iniciarProcesso" prefHeight="25.0" prefWidth="183.0" text="Gerar" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="27.0" />
-      <CheckBox fx:id="boConsulta" layoutX="27.0" layoutY="665.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="244.0" text="Gerar coluna de Consulta" />
-      <ProgressBar fx:id="progresso" layoutX="297.0" layoutY="519.0" prefHeight="37.0" prefWidth="244.0" progress="0.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="297.0" AnchorPane.rightAnchor="27.0" />
+      <TextField fx:id="qt_req" alignment="CENTER" disable="true" editable="false" layoutX="129.0" layoutY="616.0" prefHeight="25.0" prefWidth="198.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="129.0" AnchorPane.rightAnchor="353.0" />
+      <Button fx:id="botao" layoutX="358.0" layoutY="461.0" mnemonicParsing="false" onAction="#iniciarProcesso" prefHeight="25.0" prefWidth="159.0" text="Gerar" AnchorPane.bottomAnchor="59.0" AnchorPane.rightAnchor="27.0" />
+      <CheckBox fx:id="boConsulta" layoutX="340.0" layoutY="620.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="129.0" text="Gerar URL Consulta" />
+      <Label layoutX="26.0" layoutY="665.0" text="Retentativas" />
+      <TextField fx:id="qtRetentativas" accessibleHelp="Quantidade de tentativa que o sistema irá fazer para tentar se conectar com os Correios" layoutX="131.0" layoutY="661.0" text="20" />
+      <ProgressBar fx:id="progresso" accessibleHelp="Barra de progresso" layoutX="297.0" layoutY="519.0" prefHeight="37.0" prefWidth="244.0" progress="0.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="297.0" AnchorPane.rightAnchor="27.0" />
    </children>
 </AnchorPane>

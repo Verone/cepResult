@@ -1,8 +1,12 @@
 package br.com.montroni.cepResult.view;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +17,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
-
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
 
 import br.com.montroni.cepResult.CepResult;
 
@@ -98,6 +99,8 @@ public final class GerarCSV extends Thread {
     private String txtLargura;
     
     private String txtComprimento;
+    
+    private Integer qtRetentativas;
 
     Map<String, String> mapaServicos = new HashMap<String, String>();
 
@@ -111,6 +114,10 @@ public final class GerarCSV extends Thread {
 
     public void incluiServico(String pCodigo, String pDescricao) {
         mapaServicos.put(pCodigo, pDescricao);
+    }
+    
+    public int quantidadeServicoSelecionado() {
+        return mapaServicos.size();
     }
 
     public String listaServicoSelecionado() {
@@ -152,8 +159,6 @@ public final class GerarCSV extends Thread {
         String pindicaCalcula = "3";
         String consulta;
 
-        Client client = Client.create();
-
         OutputStream out = null;
         try {
             out = new FileOutputStream(getArquivo());
@@ -181,13 +186,18 @@ public final class GerarCSV extends Thread {
                             + listaServicoSelecionado() + "&nVlDiametro=" + pvldiametro + "&StrRetorno=" + pStrRetorno
                             + "&nIndicaCalculo=" + pindicaCalcula + "";
 
-                    WebResource webResource = client.resource(consulta);
-
-                    String s = webResource.get(String.class);
-                    Document doc = Jsoup.parse(s, "", Parser.xmlParser());
-                    for (Object obj : doc.childNodes().get(2).childNodes().toArray()) {
+                    String retornoCorreios = null;
+                    Integer i = 0;
+                	do {
+                		retornoCorreios = sendGET(consulta);
+                		i++;
+					} while (retornoCorreios == "ERROR" && i < qtRetentativas);
+                    
+                    Document doc = Jsoup.parse(retornoCorreios, "", Parser.xmlParser());
+                    for (Object obj : doc.childNodes().get(1).childNodes().toArray()) {
                         boolean logAtivo = false;
                         if (logAtivo) {
+                        	System.out.println("URL: " + consulta);
                             System.out.println("Codigo: " + ((Element) obj).select("Codigo").text());
                             System.out.println("Valor: " + ((Element) obj).select("Valor").text());
                             System.out.println("PrazoEntrega: " + ((Element) obj).select("PrazoEntrega").text());
@@ -246,6 +256,34 @@ public final class GerarCSV extends Thread {
             JOptionPane.showMessageDialog(null, e1.getMessage());
         }
     }
+    
+    private static String sendGET(String URL) throws IOException {
+		URL obj = new URL(URL);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		con.setRequestMethod("GET");
+		int responseCode = con.getResponseCode();
+//		System.out.println("GET Response Code :: " + responseCode);
+		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			// print result
+//			System.out.println(response.toString());
+			return response.toString();
+		} else {
+			System.out.println("GET Response Code :: " + responseCode);
+//			System.out.println("GET request not worked");
+			return "ERROR";
+		}
+
+	}
 
     private ArrayList<Peso> listaDePesosAhSerConsultado() {
         ArrayList<Peso> listaPeso = new ArrayList<Peso>();
@@ -913,6 +951,14 @@ public final class GerarCSV extends Thread {
     public void setTxtComprimento(String txtComprimento) {
         this.txtComprimento = txtComprimento;
     }
+
+	public Integer getQtRetentativas() {
+		return qtRetentativas;
+	}
+
+	public void setQtRetentativas(Integer qtRetentativas) {
+		this.qtRetentativas = qtRetentativas;
+	}
 
 	public static Double getVltotalProcessamento() {
 		return vltotalProcessamento;
