@@ -200,11 +200,7 @@ public class ControllerForm {
 
 	@FXML
 	private TextField qtRetentativas;
-
-	GerarCSV gerarCSV = GerarCSV.getInstance();
-
-	Thread thredGerarCSV = new Thread(gerarCSV);
-
+	
 	public ControllerForm() {
 	}
 
@@ -228,9 +224,13 @@ public class ControllerForm {
 			e.printStackTrace();
 		}
 	}
+	
+	GerarCSV gerarCSV = GerarCSV.getInstance();
 
 	@FXML
 	public void iniciarProcesso() {
+
+		Thread thredGerarCSV = new Thread(gerarCSV);
 
 		if (cep.getText().length() != 8) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -244,10 +244,12 @@ public class ControllerForm {
 
 		boolean bo_servico = false;
 
-		if (botao.getText() == "Cancelar e Encerrar") {
-			System.exit(0);
-		} else {
-			botao.setText("Cancelar e Encerrar");
+		if ("Encerrar".equals(botao.getText())) {
+			gerarCSV.pararExecucao();
+		    botao.setText("Gerar");
+		    return;
+		} else if ("Gerar".equals(botao.getText())) {
+			botao.setText("Encerrar");
 		}
 
 		gerarCSV.setUsuario(usuario.getText());
@@ -259,7 +261,7 @@ public class ControllerForm {
 		gerarCSV.setTxtComprimento(txtComprimento.getText());
 		gerarCSV.setQtRetentativas(Integer.parseInt(qtRetentativas.getText()));
 
-		listaDeEstadosHabilitados();
+		listaDeEstadosHabilitados(gerarCSV);
 
 		if (cb_41068.isSelected()) {
 			gerarCSV.incluiServico("41068", "PAC com contrato - 41068");
@@ -441,7 +443,7 @@ public class ControllerForm {
 
 	}
 
-	private void listaDeEstadosHabilitados() {
+	private void listaDeEstadosHabilitados(GerarCSV gerarCSV) {
 		gerarCSV.setBoACRE(boACRE.isSelected());
 		gerarCSV.setBoALAGOAS(boALAGOAS.isSelected());
 		gerarCSV.setBoAMAZONAS(boAMAZONAS.isSelected());

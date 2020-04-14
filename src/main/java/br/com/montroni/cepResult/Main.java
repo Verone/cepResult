@@ -3,10 +3,12 @@ package br.com.montroni.cepResult;
 import java.net.URL;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
@@ -15,12 +17,18 @@ public class Main extends Application {
 	}
 
 	@Override
-	public void start(Stage palco) throws Exception {
+	public void start(final Stage palco) throws Exception {
 		URL arquivoFXML = getClass().getResource("frmForm.fxml");
 		Parent fxmlParent = (Parent) FXMLLoader.load(arquivoFXML);
 		palco.setScene(new Scene(fxmlParent, 670, 690));
-		palco.setTitle("CEPFácil v1.15");
+		palco.setTitle("CEPFácil v1.16");
 		palco.setResizable(false);
 		palco.show();
+		palco.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent event) {
+				System.exit(0);
+			}
+		});
 	}
+
 }

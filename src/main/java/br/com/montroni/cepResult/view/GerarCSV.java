@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -160,8 +161,11 @@ public final class GerarCSV extends Thread {
         String consulta;
 
         OutputStream out = null;
+		OutputStream log = null;
         try {
             out = new FileOutputStream(getArquivo());
+    		Calendar data = Calendar.getInstance();
+            log = new FileOutputStream("log_" + data.getTimeInMillis() + ".txt");
 
             String cabecalho = "Descrição da Região;CEP INICIAL;CEP FINAL;TRANSPORTADORA;TIPO DE SERVIÇO;PESO INICIAL;PESO FINAL;VALOR;PRAZO" + (isGeraLog() ? ";Pesquisa Servico" : "");
             
@@ -189,9 +193,24 @@ public final class GerarCSV extends Thread {
                     String retornoCorreios = null;
                     Integer i = 0;
                 	do {
-                		retornoCorreios = sendGET(consulta);
+                		retornoCorreios = sendGET(consulta, log);
                 		i++;
+                		if (retornoCorreios == "ERROR") {
+							try {
+								sleep(60000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
 					} while (retornoCorreios == "ERROR" && i < qtRetentativas);
+                	
+                	if (retornoCorreios == "ERROR") {
+                        out.close();
+                        log.close();
+                        throw new IOException("Foi tentado consultar por " + qtRetentativas +" e não houve sucesso.");
+					}
+                	
                     
                     Document doc = Jsoup.parse(retornoCorreios, "", Parser.xmlParser());
                     for (Object obj : doc.childNodes().get(1).childNodes().toArray()) {
@@ -244,25 +263,34 @@ public final class GerarCSV extends Thread {
 
                     if (pararExecucao) {
                         out.close();
-                        pararExecucao = false;
+                        log.close();
                         return;
                     }
 
                 }
             }
             out.close();
+            log.close();
 
         } catch (IOException e1) {
-            JOptionPane.showMessageDialog(null, e1.getMessage());
+            JOptionPane.showMessageDialog(null,
+            	    "O sistema encontrou um erro e será fechado! \n\nErro:\n" + e1.getMessage(),
+            	    "ERRO",
+            	    JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
     }
     
-    private static String sendGET(String URL) throws IOException {
+    private static String sendGET(String URL, OutputStream log) throws IOException {
 		URL obj = new URL(URL);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
 		int responseCode = con.getResponseCode();
-//		System.out.println("GET Response Code :: " + responseCode);
+		System.out.println("GET Response Code :: " + responseCode);
+		String logURL = "URL: " + URL;
+		log.write(logURL.getBytes("ISO-8859-1"));
+        log.write('\n');
+        String logRetorno = null;
 		if (responseCode == HttpURLConnection.HTTP_OK) { // success
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					con.getInputStream()));
@@ -276,10 +304,16 @@ public final class GerarCSV extends Thread {
 
 			// print result
 //			System.out.println(response.toString());
+			logRetorno = "Retorno: " + response.toString();
+			log.write(logRetorno.getBytes("ISO-8859-1"));
+			log.write('\n');
 			return response.toString();
-		} else {
-			System.out.println("GET Response Code :: " + responseCode);
+		} else { // error
 //			System.out.println("GET request not worked");
+
+			logRetorno = "Retorno: " + responseCode + " " + con.getResponseMessage();
+			log.write(logRetorno.getBytes("ISO-8859-1"));
+			log.write('\n');
 			return "ERROR";
 		}
 
@@ -689,10 +723,18 @@ public final class GerarCSV extends Thread {
     }
 
     public void pararExecucao() {
-        this.pararExecucao = true;
+    	setPararExecucao(true);
     }
+    
+    public void setPararExecucao(boolean pararExecucao) {
+		this.pararExecucao = pararExecucao;
+	}
 
-    public void setSenha(String senha) {
+	public boolean isPararExecucao() {
+		return pararExecucao;
+	}
+
+	public void setSenha(String senha) {
         this.senha = senha;
     }
 
