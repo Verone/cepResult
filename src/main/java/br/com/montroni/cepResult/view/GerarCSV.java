@@ -537,7 +537,7 @@ public final class GerarCSV extends Thread {
             listaCep.add(new Cep("64335000", "64339999", "64335001", "PI - Regiao Metropolitana 3"));
             listaCep.add(new Cep("64340000", "64387999", "64340001", "PI - Interior 4"));
             listaCep.add(new Cep("64388000", "64394999", "64388001", "PI - Regiao Metropolitana 4"));
-            listaCep.add(new Cep("64395000", "65630000", "64395001", "PI - Interior 5"));
+            listaCep.add(new Cep("64395000", "64999999", "64395001", "PI - Interior 5"));
         }
 
         if (boPARANA) {
