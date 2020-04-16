@@ -379,9 +379,10 @@ public final class GerarCSV extends Thread {
             listaCep.add(new Cep("69000001", "69099999", "69000001", "AM - Capital"));
             listaCep.add(new Cep("69100000", "69254999", "69100001", "AM - Interior"));
             listaCep.add(new Cep("69255000", "69259999", "69255001", "AM - Regiao Metropolitana"));
-            listaCep.add(new Cep("69260000", "69414999", "69260001", "AM - Interior 2"));
+            listaCep.add(new Cep("69260000", "69299999", "69260001", "AM - Interior 2"));
+            listaCep.add(new Cep("69400001", "69414999", "69400001", "AM - Interior 3"));
             listaCep.add(new Cep("69415000", "69424999", "69415001", "AM - Regiao Metropolitana 2"));
-            listaCep.add(new Cep("69425000", "69899999", "69425001", "AM - Interior 3"));
+            listaCep.add(new Cep("69425000", "69899999", "69425001", "AM - Interior 4"));
         }
 
         if (boAMAPA) {
@@ -477,7 +478,9 @@ public final class GerarCSV extends Thread {
         	listaCep.add(new Cep("35830000", "35844999", "35830001", "MG - Regiao Metropolitana 9"));
         	listaCep.add(new Cep("35845000", "35969999", "35845001", "MG - Interior 9"));
         	listaCep.add(new Cep("35970000", "35983999", "35970001", "MG - Regiao Metropolitana 10"));
-        	listaCep.add(new Cep("35984000", "39997999", "35984001", "MG - Interior 10"));
+        	listaCep.add(new Cep("35984000", "37639999", "35984001", "MG - Interior 10"));
+            listaCep.add(new Cep("37640000", "37649999", "37640001", "MG - EXTREMA"));
+        	listaCep.add(new Cep("37650000", "39997999", "37650001", "MG - Interior 11"));
         }
 
         if (boMATO_GROSSO_SUL) {
@@ -685,7 +688,6 @@ public final class GerarCSV extends Thread {
             listaCep.add(new Cep("13930000", "18000000", "13930001", "SP - Interior 24"));
             listaCep.add(new Cep("18000001", "18119999", "18000001", "SP - Regiao Metropolitana 25"));
             listaCep.add(new Cep("18120000", "19999999", "18120001", "SP - Interior 25"));
-            listaCep.add(new Cep("37640000", "37649999", "37640001", "SP - EXTREMAMG"));
         }
         if (boTOCANTINS) {
             listaCep.add(new Cep("77000001", "77270999", "77000001", "TO - Capital"));
