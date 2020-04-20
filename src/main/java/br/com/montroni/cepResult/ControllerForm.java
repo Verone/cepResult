@@ -235,8 +235,7 @@ public class ControllerForm {
 		if (cep.getText().length() != 8) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Erro ao iniciar atividade");
-			alert.setHeaderText("Atenção");
-			alert.setContentText("Cep deve conter 8 caracteres.\n.Atualmente tem " + cep.getText().length());
+			alert.setContentText("Cep deve conter 8 caracteres.\nAtualmente contem " + cep.getText().length());
 			alert.show();
 			return;
 
@@ -383,7 +382,6 @@ public class ControllerForm {
 			if (edDescricao01.getText().trim().isEmpty()) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setHeaderText("Erro ao iniciar atividade");
-				alert.setHeaderText("Atenção");
 				alert.setContentText("Informou um codigo personalizado porém faltou a descrição.");
 				alert.show();
 				return;
@@ -398,7 +396,6 @@ public class ControllerForm {
 			if (edDescricao02.getText().trim().isEmpty()) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setHeaderText("Erro ao iniciar atividade");
-				alert.setHeaderText("Atenção");
 				alert.setContentText("Informou um codigo personalizado porém faltou a descrição.");
 				alert.show();
 				return;
@@ -411,7 +408,6 @@ public class ControllerForm {
 		if (!bo_servico) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setHeaderText("Erro ao iniciar atividade");
-			alert.setHeaderText("Atenção");
 			alert.setContentText("Pelo menos 1 dos servicos deve estar selecionado.");
 			alert.show();
 			return;
