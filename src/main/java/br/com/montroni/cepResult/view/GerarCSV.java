@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -191,12 +193,23 @@ public final class GerarCSV extends Thread {
 							+ "&nVlDiametro=" + pvldiametro + "&StrRetorno=" + pStrRetorno + "&nIndicaCalculo="
 							+ pindicaCalcula + "";
 
-					String retornoCorreios = null;
+					String retornoCorreios = "";
+					String tipoRetorno = "";
 					Integer i = 0;
+					Document doc;
+
 					do {
 						retornoCorreios = sendGET(consulta, log);
 						i++;
-						if (retornoCorreios == "ERROR") {
+						doc = Jsoup.parse(retornoCorreios, "", Parser.xmlParser());
+						if (doc.childNodeSize() > 1) {
+							for (Object erro : doc.childNodes().get(1).childNodes().toArray()) {
+								if (((Element) erro).select("Erro").text().equals("-888")) {
+									tipoRetorno = "ALERTA";
+								}
+							}
+						}
+						if (retornoCorreios == "ERROR" || tipoRetorno == "ALERTA") {
 							try {
 								sleep(60000);
 							} catch (InterruptedException e) {
@@ -204,61 +217,95 @@ public final class GerarCSV extends Thread {
 								e.printStackTrace();
 							}
 						}
-					} while (retornoCorreios == "ERROR" && i < qtRetentativas);
+					} while ((retornoCorreios == "ERROR" || tipoRetorno == "ALERTA") && i < qtRetentativas);
 
-					// Valida se ficou com erro após retentativa se sim da Exception
+					// Se ERROR para execução e lança exception
 					if (retornoCorreios == "ERROR") {
 						out.close();
 						log.close();
 						throw new IOException("Foi tentado consultar por " + qtRetentativas + " e não houve sucesso.");
 					}
 
-					Document doc = Jsoup.parse(retornoCorreios, "", Parser.xmlParser());
-
-					// Valida se os dados retornados do correio tem algum erro, se tiver apresenta e
-					// para processamento
-					if (doc.childNodeSize() > 1 && !doc.getElementsByTag("Erro").text().equals("0")) {
-						JOptionPane.showMessageDialog(null, "Motivo: O Correios retornou erro!" + "\n\nErro: \n"
-								+ doc.getElementsByTag("Erro").text() + " - " + doc.getElementsByTag("MsgErro").text()
-								+ "\n\n\n1 - Clique em Encerrar!" + "\n2 - Ajute os dados e inicie novamente.",
-								"Processamento parado!", JOptionPane.ERROR_MESSAGE);
-						this.pararExecucao = true;
-//						throw new IOException(
-//								doc.getElementsByTag("Erro").text() + " - " + doc.getElementsByTag("MsgErro").text());
-					} else {
-						for (Object obj : doc.childNodes().get(1).childNodes().toArray()) {
-							CepResult cep = new CepResult();
-							cep.setCodigo(((Element) obj).select("Codigo").text());
-							cep.setEntregaDomiciliar(((Element) obj).select("EntregaDomiciliar").text());
-							cep.setEntregaSabado("NI");
-							cep.setPrazoEntrega(((Element) obj).select("PrazoEntrega").text());
-							cep.setValor(((Element) obj).select("Valor").text());
-							cep.setValorAvisoRecebimento(((Element) obj).select("ValorValorDeclarado").text());
-							cep.setValorMaoPropria(((Element) obj).select("ValorMaoPropria").text());
-							cep.setValorSemAdiciona(((Element) obj).select("ValorSemAdicionais").text());
-							cep.setValorValorDeclarado(((Element) obj).select("ValorValorDeclarado").text());
-							if (cep.getValor().toString().equals("0,00".toString())) {
-								cep.setValor("Retorno com valor zerado");
+					//Se teve um retorno de cotação dos Correios, percorre o array validandos se algum retornou 'Erro'
+					if (doc.childNodeSize() > 1) {
+						for (Object erro : doc.childNodes().get(1).childNodes().toArray()) {
+							if (((Element) erro).select("Erro").text().equals("99")
+									|| ((Element) erro).select("Erro").text().equals("-2")
+									) {
+								tipoRetorno = "ERROR";
+							} else if (!((Element) erro).select("Erro").text().equals("0")) {
+								tipoRetorno = "ALERTA";
 							}
-							String linha = c.getCepDescricao() + ";" + c.getCepInicial() + ";" + c.getCepFinal()
-									+ ";CORREIOS;" + mapaServicos.get(cep.getCodigo()) + ";" + p.getPesoInicial() + ";"
-									+ p.getPesoFinal() + ";" + cep.getValor() + ";" + cep.getPrazoEntrega()
-									+ (isGeraLog() ? ";" + consulta : "");
-
-							for (byte b1 : linha.getBytes("ISO-8859-1")) {
-								out.write(b1);
-							}
-							out.write('\n');
 						}
-					}
-					;
+						// Se 'Erro' encontrato não for um problema de dados informados, gera um ALERTA e continua o processamento
+						if (tipoRetorno.equals("ALERTA")) {
+							
+							// create a JTextArea
+						      JTextArea textArea = new JTextArea(10, 25);
+						      textArea.setText("Motivo: O Correios não retornou cotação!"
+						    		    + "\n\nErro: "
+										+ doc.getElementsByTag("Erro").text() + " - "
+						    		    + doc.getElementsByTag("MsgErro").text()
+										+ "\nURL: " + consulta 
+										+ "\n\n\nNotifique o desenvolvedor sobre este alerta.");
+						      //bloquear edição
+						      textArea.setEditable(false);
+						      //quebrar linha
+						      textArea.setLineWrap(true);
+						      //quebrar por palavra
+						      textArea.setWrapStyleWord(true);
+						      
+						      // wrap a scrollpane around it
+						      JScrollPane scrollPane = new JScrollPane(textArea);
+						      
+						      // display them in a message dialog
+						      JOptionPane.showMessageDialog(null, scrollPane, "Algo errado não está certo!",
+						    	        JOptionPane.WARNING_MESSAGE);
+						}
+						//Se 'Erro' encontrato impede de continuar, para execução e lança mensagem.
+						if (tipoRetorno.equals("ERROR")) {
+							out.close();
+							log.close();
+							JOptionPane.showMessageDialog(null, "Motivo: O Correios retornou erro!" + "\n\nErro: \n"
+									+ doc.getElementsByTag("Erro").text() + " - " + doc.getElementsByTag("MsgErro").text()
+									+ "\n\n\n1 - Clique em Encerrar!" + "\n2 - Ajute os dados e inicie novamente.",
+									"Processamento parado!", JOptionPane.ERROR_MESSAGE);
+							this.pararExecucao = true;
+//							throw new IOException(
+//									doc.getElementsByTag("Erro").text() + " - " + doc.getElementsByTag("MsgErro").text());
+						} else {
+							for (Object obj : doc.childNodes().get(1).childNodes().toArray()) {
+								CepResult cep = new CepResult();
+								cep.setCodigo(((Element) obj).select("Codigo").text());
+								cep.setEntregaDomiciliar(((Element) obj).select("EntregaDomiciliar").text());
+								cep.setEntregaSabado("NI");
+								cep.setPrazoEntrega(((Element) obj).select("PrazoEntrega").text());
+								cep.setValor(((Element) obj).select("Valor").text());
+								cep.setValorAvisoRecebimento(((Element) obj).select("ValorValorDeclarado").text());
+								cep.setValorMaoPropria(((Element) obj).select("ValorMaoPropria").text());
+								cep.setValorSemAdiciona(((Element) obj).select("ValorSemAdicionais").text());
+								cep.setValorValorDeclarado(((Element) obj).select("ValorValorDeclarado").text());
+								if (cep.getValor().toString().equals("0,00".toString())) {
+									cep.setValor("Retorno com valor zerado");
+								}
+								String linha = c.getCepDescricao() + ";" + c.getCepInicial() + ";" + c.getCepFinal()
+										+ ";CORREIOS;" + mapaServicos.get(cep.getCodigo()) + ";" + p.getPesoInicial() + ";"
+										+ p.getPesoFinal() + ";" + cep.getValor() + ";" + cep.getPrazoEntrega()
+										+ (isGeraLog() ? ";" + consulta : "");
+
+								for (byte b1 : linha.getBytes("ISO-8859-1")) {
+									out.write(b1);
+								}
+								out.write('\n');
+							}
+						}
+					};
 
 					if (pararExecucao) {
 						out.close();
 						log.close();
 						return;
 					}
-
 				}
 			}
 			out.close();
