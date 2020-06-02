@@ -506,7 +506,6 @@ public final class GerarCSV extends Thread {
 		if (boMINAS_GERAIS) {
 			listaCep.add(new Cep("30000001", "31999999", "30000001", "MG - Capital"));
 			listaCep.add(new Cep("32000001", "32499999", "32000001", "MG - Regiao Metropolitana"));
-			listaCep.add(new Cep("32500000", "32600000", "32500001", "MG - Interior"));
 			listaCep.add(new Cep("32600001", "32699999", "32600001", "MG - Regiao Metropolitana 2"));
 			listaCep.add(new Cep("32700000", "32899999", "32700001", "MG - Interior 2"));
 			listaCep.add(new Cep("32900000", "34999999", "32900001", "MG - Regiao Metropolitana 3"));
