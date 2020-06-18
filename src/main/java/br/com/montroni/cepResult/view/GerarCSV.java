@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -205,7 +208,13 @@ public final class GerarCSV extends Thread {
 						if (doc.childNodeSize() > 1) {
 							for (Object erro : doc.childNodes().get(1).childNodes().toArray()) {
 								if (((Element) erro).select("Erro").text().equals("-888")) {
-									tipoRetorno = "ALERTA";
+									
+									String msgErro = UTF8toISO(((Element) erro).select("MsgErro").text());
+
+									if (!msgErro.equals(
+											"N?o foi encontrada precifica??o. ERP-007: CEP de origem nao pode postar para o CEP de destino informado(-1).")) {
+										tipoRetorno = "ALERTA";
+									}
 								}
 							}
 						}
@@ -226,49 +235,50 @@ public final class GerarCSV extends Thread {
 						throw new IOException("Foi tentado consultar por " + qtRetentativas + " e não houve sucesso.");
 					}
 
-					//Se teve um retorno de cotação dos Correios, percorre o array validandos se algum retornou 'Erro'
+					// Se teve um retorno de cotação dos Correios, percorre o array validandos se
+					// algum retornou 'Erro'
 					if (doc.childNodeSize() > 1) {
 						for (Object erro : doc.childNodes().get(1).childNodes().toArray()) {
 							if (((Element) erro).select("Erro").text().equals("99")
-									|| ((Element) erro).select("Erro").text().equals("-2")
-									) {
+									|| ((Element) erro).select("Erro").text().equals("-2")) {
 								tipoRetorno = "ERROR";
 							} else if (!((Element) erro).select("Erro").text().equals("0")) {
 								tipoRetorno = "ALERTA";
 							}
 						}
-						// Se 'Erro' encontrato não for um problema de dados informados, gera um ALERTA e continua o processamento
+						// Se 'Erro' encontrato não for um problema de dados informados, gera um ALERTA
+						// e continua o processamento
 						if (tipoRetorno.equals("ALERTA")) {
-							
+
 							// create a JTextArea
-						      JTextArea textArea = new JTextArea(10, 25);
-						      textArea.setText("Motivo: O Correios não retornou cotação!"
-						    		    + "\n\nErro: "
-										+ doc.getElementsByTag("Erro").text() + " - "
-						    		    + doc.getElementsByTag("MsgErro").text()
-										+ "\nURL: " + consulta 
-										+ "\n\n\nNotifique o desenvolvedor sobre este alerta.");
-						      //bloquear edição
-						      textArea.setEditable(false);
-						      //quebrar linha
-						      textArea.setLineWrap(true);
-						      //quebrar por palavra
-						      textArea.setWrapStyleWord(true);
-						      
-						      // wrap a scrollpane around it
-						      JScrollPane scrollPane = new JScrollPane(textArea);
-						      
-						      // display them in a message dialog
-						      JOptionPane.showMessageDialog(null, scrollPane, "Algo errado não está certo!",
-						    	        JOptionPane.WARNING_MESSAGE);
+							JTextArea textArea = new JTextArea(10, 25);
+							textArea.setText("Motivo: O Correios não retornou cotação!" + "\n\nErro: "
+									+ doc.getElementsByTag("Erro").text() + " - "
+									+ doc.getElementsByTag("MsgErro").text() + "\nURL: " + consulta
+									+ "\n\n\nNotifique o desenvolvedor sobre este alerta.");
+							// bloquear edição
+							textArea.setEditable(false);
+							// quebrar linha
+							textArea.setLineWrap(true);
+							// quebrar por palavra
+							textArea.setWrapStyleWord(true);
+
+							// wrap a scrollpane around it
+							JScrollPane scrollPane = new JScrollPane(textArea);
+
+							// display them in a message dialog
+							JOptionPane.showMessageDialog(null, scrollPane, "Algo errado não está certo!",
+									JOptionPane.WARNING_MESSAGE);
 						}
-						//Se 'Erro' encontrato impede de continuar, para execução e lança mensagem.
+						// Se 'Erro' encontrato impede de continuar, para execução e lança mensagem.
 						if (tipoRetorno.equals("ERROR")) {
 							out.close();
 							log.close();
-							JOptionPane.showMessageDialog(null, "Motivo: O Correios retornou erro!" + "\n\nErro: \n"
-									+ doc.getElementsByTag("Erro").text() + " - " + doc.getElementsByTag("MsgErro").text()
-									+ "\n\n\n1 - Clique em Encerrar!" + "\n2 - Ajute os dados e inicie novamente.",
+							JOptionPane.showMessageDialog(null,
+									"Motivo: O Correios retornou erro!" + "\n\nErro: \n"
+											+ doc.getElementsByTag("Erro").text() + " - "
+											+ doc.getElementsByTag("MsgErro").text() + "\n\n\n1 - Clique em Encerrar!"
+											+ "\n2 - Ajute os dados e inicie novamente.",
 									"Processamento parado!", JOptionPane.ERROR_MESSAGE);
 							this.pararExecucao = true;
 //							throw new IOException(
@@ -289,8 +299,8 @@ public final class GerarCSV extends Thread {
 									cep.setValor("Retorno com valor zerado");
 								}
 								String linha = c.getCepDescricao() + ";" + c.getCepInicial() + ";" + c.getCepFinal()
-										+ ";CORREIOS;" + mapaServicos.get(cep.getCodigo()) + ";" + p.getPesoInicial() + ";"
-										+ p.getPesoFinal() + ";" + cep.getValor() + ";" + cep.getPrazoEntrega()
+										+ ";CORREIOS;" + mapaServicos.get(cep.getCodigo()) + ";" + p.getPesoInicial()
+										+ ";" + p.getPesoFinal() + ";" + cep.getValor() + ";" + cep.getPrazoEntrega()
 										+ (isGeraLog() ? ";" + consulta : "");
 
 								for (byte b1 : linha.getBytes("ISO-8859-1")) {
@@ -299,7 +309,8 @@ public final class GerarCSV extends Thread {
 								out.write('\n');
 							}
 						}
-					};
+					}
+					;
 
 					if (pararExecucao) {
 						out.close();
@@ -318,6 +329,21 @@ public final class GerarCSV extends Thread {
 			System.exit(0);
 		}
 	}
+	public static String UTF8toISO(String str){
+        Charset utf8charset = Charset.forName("UTF-8");
+        Charset iso88591charset = Charset.forName("ISO-8859-1");
+
+        ByteBuffer inputBuffer = ByteBuffer.wrap(str.getBytes());
+
+        // decode UTF-8
+        CharBuffer data = utf8charset.decode(inputBuffer);
+
+        // encode ISO-8559-1
+        ByteBuffer outputBuffer = iso88591charset.encode(data);
+        byte[] outputData = outputBuffer.array();
+
+        return new String(outputData);
+    }
 
 	private static String sendGET(String URL, OutputStream log) throws IOException {
 		URL obj = new URL(URL);
@@ -507,7 +533,6 @@ public final class GerarCSV extends Thread {
 			listaCep.add(new Cep("30000001", "31999999", "30000001", "MG - Capital"));
 			listaCep.add(new Cep("32000001", "32499999", "32000001", "MG - Regiao Metropolitana"));
 			listaCep.add(new Cep("32600001", "32699999", "32600001", "MG - Regiao Metropolitana 2"));
-			listaCep.add(new Cep("32700000", "32899999", "32700001", "MG - Interior 2"));
 			listaCep.add(new Cep("32900000", "34999999", "32900001", "MG - Regiao Metropolitana 3"));
 			listaCep.add(new Cep("35000000", "35449999", "35000001", "MG - Interior 3"));
 			listaCep.add(new Cep("35450000", "35469999", "35450001", "MG - Regiao Metropolitana 4"));
@@ -556,7 +581,6 @@ public final class GerarCSV extends Thread {
 			listaCep.add(new Cep("58280000", "58286999", "58280001", "PB - Regiao Metropolitana 2"));
 			listaCep.add(new Cep("58287000", "58296999", "58287001", "PB - Interior 2"));
 			listaCep.add(new Cep("58297000", "58309999", "58297001", "PB - Regiao Metropolitana 3"));
-			listaCep.add(new Cep("58310000", "58314999", "58310001", "PB - Interior 3"));
 			listaCep.add(new Cep("58315000", "58329999", "58315001", "PB - Regiao Metropolitana 4"));
 			listaCep.add(new Cep("58330000", "58336999", "58330001", "PB - Interior 4"));
 			listaCep.add(new Cep("58337000", "58337999", "58337001", "PB - Regiao Metropolitana 5"));
@@ -568,7 +592,6 @@ public final class GerarCSV extends Thread {
 			listaCep.add(new Cep("53000000", "53989999", "53000001", "PE - Regiao Metropolitana"));
 			listaCep.add(new Cep("53990000", "54000000", "53990001", "PE - Interior"));
 			listaCep.add(new Cep("54000001", "54599999", "54000001", "PE - Regiao Metropolitana 2"));
-			listaCep.add(new Cep("54600000", "54700000", "54600001", "PE - Interior 2"));
 			listaCep.add(new Cep("54700001", "54999999", "54700001", "PE - Regiao Metropolitana 3"));
 			listaCep.add(new Cep("55000000", "55589999", "55000001", "PE - Interior 3"));
 			listaCep.add(new Cep("55590000", "55599999", "55590001", "PE - Regiao Metropolitana 4"));
@@ -690,7 +713,6 @@ public final class GerarCSV extends Thread {
 			listaCep.add(new Cep("07000001", "08899999", "07000001", "SP - Regiao Metropolitana 2"));
 			listaCep.add(new Cep("08900000", "09000000", "08900001", "SP - Interior 2"));
 			listaCep.add(new Cep("09000001", "09999999", "09000001", "SP - Regiao Metropolitana 3"));
-			listaCep.add(new Cep("10000000", "11000000", "10000001", "SP - Interior 3"));
 			listaCep.add(new Cep("11000001", "11249999", "11000001", "SP - Regiao Metropolitana 4"));
 			listaCep.add(new Cep("11250000", "11300000", "11250001", "SP - Interior 4"));
 			listaCep.add(new Cep("11300001", "11499999", "11300001", "SP - Regiao Metropolitana 5"));
