@@ -55,7 +55,7 @@ public class Peso {
 
 
 	public Peso(String pPesoInicial, String pPesoFinal, String pPesoConsulta) {
-		this.pesoInicial = pPesoConsulta;
+		this.pesoInicial = pPesoInicial;
 		this.pesoFinal = pPesoFinal;
 		this.pesoConsulta = pPesoConsulta;// TODO Auto-generated constructor stub
 	}

@@ -393,7 +393,8 @@ public final class GerarCSV extends Thread {
 
 	private ArrayList<Peso> listaDePesosAhSerConsultado() {
 		ArrayList<Peso> listaPeso = new ArrayList<Peso>();
-		listaPeso.add(new Peso("0", "0,5", "0,4"));
+		listaPeso.add(new Peso("0,001", "0,3", "0,3"));
+		listaPeso.add(new Peso("0,301", "0,5", "0,5"));
 		listaPeso.add(new Peso("0,501", "1", "0,511"));
 		listaPeso.add(new Peso("1,001", "1,5", "1,011"));
 		listaPeso.add(new Peso("1,501", "2", "1,511"));
