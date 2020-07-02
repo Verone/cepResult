@@ -31,6 +31,8 @@ public final class GerarCSV extends Thread {
 	private static final GerarCSV INSTANCE = new GerarCSV();
 
 	private boolean geraLog = false;
+	
+	private boolean geraAlerta = false;
 
 	private boolean boACRE;
 
@@ -210,9 +212,10 @@ public final class GerarCSV extends Thread {
 								if (((Element) erro).select("Erro").text().equals("-888")) {
 									
 									String msgErro = UTF8toISO(((Element) erro).select("MsgErro").text());
-
 									if (!msgErro.equals(
-											"N?o foi encontrada precifica??o. ERP-007: CEP de origem nao pode postar para o CEP de destino informado(-1).")) {
+											"N?o foi encontrada precifica??o. ERP-007: CEP de origem nao pode postar para o CEP de destino informado(-1).")
+											&& !msgErro.equals("N?o foi encontrada precifica??o. ERP-006: CEP de origem nao pode postar para CEP de destino(-1).")
+											&& !msgErro.equals("Para este servi?o s? est? dispon?vel o c?lculo do PRAZO.")) {
 										tipoRetorno = "ALERTA";
 									}
 								}
@@ -248,7 +251,7 @@ public final class GerarCSV extends Thread {
 						}
 						// Se 'Erro' encontrato não for um problema de dados informados, gera um ALERTA
 						// e continua o processamento
-						if (tipoRetorno.equals("ALERTA")) {
+						if (tipoRetorno.equals("ALERTA") && isGeraLog()) {
 
 							// create a JTextArea
 							JTextArea textArea = new JTextArea(10, 25);
@@ -782,6 +785,14 @@ public final class GerarCSV extends Thread {
 
 	public void setLog(boolean log) {
 		this.setGeraLog(log);
+	}
+
+	public boolean isGeraAlerta() {
+		return geraAlerta;
+	}
+
+	public void setGeraAlerta(boolean geraAlerta) {
+		this.geraAlerta = geraAlerta;
 	}
 
 	public void setUsuario(String usuario) {

@@ -103,6 +103,9 @@ public class ControllerForm {
 	private CheckBox boConsulta;
 
 	@FXML
+	private CheckBox boAlerta;
+
+	@FXML
 	private CheckBox boACRE;
 
 	@FXML
@@ -255,6 +258,7 @@ public class ControllerForm {
 		gerarCSV.setSenha(senha.getText());
 		gerarCSV.setCep(cep.getText());
 		gerarCSV.setLog(boConsulta.isSelected());
+		gerarCSV.setGeraAlerta(boAlerta.isSelected());
 		gerarCSV.setTxtAltura(txtAltura.getText());
 		gerarCSV.setTxtLargura(txtLargura.getText());
 		gerarCSV.setTxtComprimento(txtComprimento.getText());
