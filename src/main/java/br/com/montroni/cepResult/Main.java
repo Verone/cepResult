@@ -21,7 +21,7 @@ public class Main extends Application {
 		URL arquivoFXML = getClass().getResource("frmForm.fxml");
 		Parent fxmlParent = (Parent) FXMLLoader.load(arquivoFXML);
 		palco.setScene(new Scene(fxmlParent, 670, 690));
-		palco.setTitle("CEPFácil v1.24");
+		palco.setTitle("CEPFácil v1.25");
 		palco.setResizable(false);
 		palco.show();
 		palco.setOnCloseRequest(new EventHandler<WindowEvent>() {

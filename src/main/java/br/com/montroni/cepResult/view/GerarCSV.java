@@ -174,7 +174,7 @@ public final class GerarCSV extends Thread {
 			Calendar data = Calendar.getInstance();
 			log = new FileOutputStream("log_" + data.getTimeInMillis() + ".txt");
 
-			String cabecalho = "Descrição da Região;CEP INICIAL;CEP FINAL;TRANSPORTADORA;TIPO DE SERVIÇO;PESO INICIAL;PESO FINAL;VALOR;PRAZO"
+			String cabecalho = "DESCRIÇÃO DA REGIÃO;CEP INICIAL;CEP FINAL;TRANSPORTADORA;TIPO DE SERVIÇO;PESO INICIAL;PESO FINAL;VALOR;PRAZO"
 					+ (isGeraLog() ? ";Pesquisa Servico" : "");
 
 			for (Byte b : cabecalho.getBytes("ISO-8859-1")) {
