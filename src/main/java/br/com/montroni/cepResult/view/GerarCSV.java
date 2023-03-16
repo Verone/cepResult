@@ -238,8 +238,7 @@ public final class GerarCSV extends Thread {
 						throw new IOException("Foi tentado consultar por " + qtRetentativas + " e não houve sucesso.");
 					}
 
-					// Se teve um retorno de cotação dos Correios, percorre o array validandos se
-					// algum retornou 'Erro'
+					// Se teve um retorno de cotação dos Correios, percorre o array validandos se algum retornou 'Erro'
 					if (doc.childNodeSize() > 1) {
 						for (Object erro : doc.childNodes().get(1).childNodes().toArray()) {
 							if (((Element) erro).select("Erro").text().equals("99")
@@ -251,7 +250,7 @@ public final class GerarCSV extends Thread {
 						}
 						// Se 'Erro' encontrato não for um problema de dados informados, gera um ALERTA
 						// e continua o processamento
-						if (tipoRetorno.equals("ALERTA") && isGeraLog()) {
+						if (tipoRetorno.equals("ALERTA") && isGeraAlerta()) {
 
 							// create a JTextArea
 							JTextArea textArea = new JTextArea(10, 25);
